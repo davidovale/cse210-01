@@ -1,19 +1,19 @@
 # Davi Ferreira do Vale
-##
+###
 import os
 import random
 from colorama import Fore
 
 jogarNovamente = "s"
-jogadas = 0
-quemJoga = 2 #1 = Machine | #2 = Player
+moves = 0
+quemJoga = 2
 maxJogadas = 9
 vencedor = ""
 matriz = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]
 
 def tela():
     global matriz
-    global jogadas
+    global moves
     os.system("cls")
     print("     1    2    3")
     print("1:    " + matriz[0][0] + " | " + matriz[0][1] + " | "+ matriz[0][2])
@@ -21,14 +21,14 @@ def tela():
     print("2:    " + matriz[1][0] + " | " + matriz[1][1] + " | "+ matriz[1][2])
     print("    -------------")
     print("3:    " + matriz[2][0] + " | " + matriz[2][1] + " | "+ matriz[2][2])
-    print("Jogadas: " + Fore.GREEN + str(jogadas) + Fore.RESET)
+    print("Moves: " + Fore.GREEN + str(moves) + Fore.RESET)
 
 def jogadorJoga():
-    global jogadas
+    global moves
     global quemJoga
     global maxJogadas
 
-    if quemJoga == 2 and jogadas < maxJogadas:
+    if quemJoga == 2 and moves < maxJogadas:
         l = int(input("Linha..: "))
         l = l-1
 
@@ -45,16 +45,16 @@ def jogadorJoga():
 
             matriz[l][c] = "X"
             quemJoga = 1
-            jogadas+=1
+            moves+=1
         except:
             print("Espaço inválido!")
 
 def cpuJoga():
-    global jogadas
+    global moves
     global maxJogadas
     global quemJoga
 
-    if quemJoga == 1 and jogadas < maxJogadas:
+    if quemJoga == 1 and moves < maxJogadas:
         l = random.randrange(0, 3)
         c = random.randrange(0, 3)
 
@@ -64,7 +64,7 @@ def cpuJoga():
         
         matriz[l][c] = "O"
         quemJoga = 2
-        jogadas+=1
+        moves+=1
 
 def verificarVitoria():
     global matriz
@@ -137,11 +137,11 @@ def verificarVitoria():
 
 def redefinir():
     global matriz
-    global jogadas
+    global moves
     global quemJoga
     global maxJogadas
     global vencedor
-    jogadas = 0
+    moves = 0
     quemJoga = 2 #1 = CPU | #2 = Jogador
     maxJogadas = 9
     vencedor = ""
@@ -154,15 +154,16 @@ while(jogarNovamente == "s"):
         jogadorJoga()
         cpuJoga()
         vencedor = verificarVitoria()
-        if(vencedor != "n") or (jogadas >= maxJogadas):
+        if(vencedor != "n") or (moves >= maxJogadas):
             break
 
-    print(Fore.RED + "Fim de Jogo" + Fore.YELLOW)
+    print(Fore.RED + "Finish" + Fore.YELLOW)
     if vencedor == "X":
-        print("Resultado: Você venceu!")
+        print("You win!!!")
     elif vencedor == "O":
         print("A CPU venceu")
     else:
         print("Resultado: Empate")
     jogarNovamente = input(Fore.BLUE + "Digite [s] para continuar ou [n] para sair: " + Fore.RESET)
     redefinir()
+
