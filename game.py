@@ -6,7 +6,7 @@ from colorama import Fore
 
 jogarNovamente = "s"
 jogadas = 0
-quemJoga = 2 #1 = CPU | #2 = Jogador
+quemJoga = 2 #1 = Machine | #2 = Player
 maxJogadas = 9
 vencedor = ""
 matriz = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]
