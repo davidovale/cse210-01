@@ -1,9 +1,15 @@
 # Davi Ferreira do Vale
-####asdsadsa
+
 
 import os
 import random
 from colorama import Fore
+
+class Player:
+    def setname(self):
+        name = input("Type your name: ")
+        return name
+    pass
 
 jogarNovamente = "s"
 moves = 0
@@ -30,25 +36,25 @@ def jogadorJoga():
     global maxJogadas
 
     if quemJoga == 2 and moves < maxJogadas:
-        l = int(input("Linha..: "))
+        l = int(input("Row..: "))
         l = l-1
 
-        c = int(input("Coluna.: "))
+        c = int(input("Column.: "))
         c = c-1
         
         try:    
             while matriz[l][c] != " ":
-                l = int(input("Linha..: "))
+                l = int(input("Row..: "))
                 l = l-1
 
-                c = int(input("Coluna.: "))
+                c = int(input("Column.: "))
                 c = c-1
 
             matriz[l][c] = "X"
             quemJoga = 1
             moves+=1
         except:
-            print("Espaço inválido!")
+            print("Inválid space!")
 
 def cpuJoga():
     global moves
@@ -143,13 +149,15 @@ def redefinir():
     global maxJogadas
     global vencedor
     moves = 0
-    quemJoga = 2 #1 = CPU | #2 = Jogador
+    quemJoga = 2 #1 = CPU | #2 = player
     maxJogadas = 9
     vencedor = ""
     matriz = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]
 
 
 while(jogarNovamente == "s"):
+    player = Player()
+    name = player.setname()
     while True:
         tela()
         jogadorJoga()
@@ -159,12 +167,13 @@ while(jogarNovamente == "s"):
             break
 
     print(Fore.RED + "Finish" + Fore.YELLOW)
+    
     if vencedor == "X":
-        print("You win!!!")
+        print(name, "You win!!!")
     elif vencedor == "O":
-        print("A CPU venceu")
+        print("The machine win!!!")
     else:
-        print("Resultado: Empate")
-    jogarNovamente = input(Fore.BLUE + "Digite [s] para continuar ou [n] para sair: " + Fore.RESET)
+        print("Result: A tie")
+    jogarNovamente = input(Fore.BLUE + "type [s] to continue or [n] to leave: " + Fore.RESET)
     redefinir()
 
